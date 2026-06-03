@@ -1,0 +1,274 @@
+{
+  "common": {
+    "companyName": "CamTek",
+    "companyNameAr": "كامتيك",
+    "tagline": "Security Solutions",
+    "phone": "+965 55222997",
+    "email": "info@camtek.kw",
+    "location": "Kuwait",
+    "instagram": "camtek.ku",
+    "whatsappLink": "https://wa.me/96555222997",
+    "copyright": "© 2026 CamTek Security Solutions. All rights reserved."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "services": "Services",
+    "projects": "Projects",
+    "quote": "Request Quote",
+    "contact": "Contact"
+  },
+  "home": {
+    "hero": {
+      "title": "Advanced Security Solutions",
+      "subtitle": "Professional surveillance camera installation for homes, businesses, and industries across Kuwait",
+      "ctaWhatsapp": "Contact via WhatsApp",
+      "ctaQuote": "Request a Quote"
+    },
+    "services": {
+      "title": "Our Services",
+      "subtitle": "Comprehensive security solutions tailored to your needs",
+      "viewAll": "View All Services"
+    },
+    "whyUs": {
+      "title": "Why Choose CamTek?",
+      "subtitle": "Trusted by hundreds of clients across Kuwait",
+      "experience": {
+        "title": "10+ Years Experience",
+        "description": "A decade of expertise in security systems installation and maintenance"
+      },
+      "support": {
+        "title": "24/7 Technical Support",
+        "description": "Round-the-clock support to ensure your systems are always operational"
+      },
+      "installation": {
+        "title": "Professional Installation",
+        "description": "Certified technicians ensuring clean and efficient installation every time"
+      },
+      "warranty": {
+        "title": "Comprehensive Warranty",
+        "description": "Full warranty on all equipment and installation work"
+      }
+    },
+    "projects": {
+      "title": "Recent Projects",
+      "subtitle": "See some of our latest security installations",
+      "viewAll": "View All Projects"
+    },
+    "testimonials": {
+      "title": "What Our Clients Say",
+      "subtitle": "Trusted by businesses and homeowners across Kuwait"
+    },
+    "cta": {
+      "title": "Ready to Secure Your Property?",
+      "subtitle": "Get a free consultation and quote for your security needs",
+      "contactUs": "Contact Us",
+      "getQuote": "Get a Quote"
+    }
+  },
+  "about": {
+    "title": "About CamTek",
+    "subtitle": "Your trusted partner in security solutions",
+    "story": {
+      "title": "Our Story",
+      "description": "CamTek has been at the forefront of security solutions in Kuwait for over a decade. We started with a simple mission: to provide reliable, high-quality surveillance systems that protect what matters most to our clients. Today, we serve hundreds of homes, businesses, and industrial facilities across Kuwait."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "description": "To be the leading provider of integrated security solutions in Kuwait, setting the standard for quality, innovation, and customer service in the surveillance industry."
+    },
+    "mission": {
+      "title": "Our Mission",
+      "description": "To deliver professional, reliable, and cutting-edge security solutions that protect lives and properties, while providing exceptional value and peace of mind to our clients."
+    },
+    "values": {
+      "title": "Our Core Values",
+      "quality": {
+        "title": "Quality",
+        "description": "We use only premium equipment from trusted brands"
+      },
+      "integrity": {
+        "title": "Integrity",
+        "description": "Honest pricing and transparent communication"
+      },
+      "reliability": {
+        "title": "Reliability",
+        "description": "Dependable service and long-term support"
+      },
+      "innovation": {
+        "title": "Innovation",
+        "description": "Staying ahead with the latest security technologies"
+      }
+    },
+    "experience": {
+      "years": "10+",
+      "title": "Years of Excellence",
+      "description": "Serving Kuwait with professional security solutions since 2014"
+    }
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Complete security solutions for every need",
+    "indoor": {
+      "title": "Indoor Cameras",
+      "description": "High-definition indoor surveillance cameras with night vision, motion detection, and wide-angle coverage for complete interior monitoring.",
+      "features": ["HD/4K Resolution", "Night Vision", "Motion Detection", "Two-Way Audio", "Wide-Angle Lens"]
+    },
+    "outdoor": {
+      "title": "Outdoor Cameras",
+      "description": "Weatherproof outdoor cameras designed to withstand harsh conditions while providing clear surveillance of your property's perimeter.",
+      "features": ["Weatherproof IP66/IP67", "Infrared Night Vision", "Vandal-Resistant", "Long-Range View", "Color Night Vision"]
+    },
+    "dvr": {
+      "title": "DVR/NVR Systems",
+      "description": "Professional recording systems with large storage capacity, remote access, and intelligent video analytics for comprehensive surveillance management.",
+      "features": ["Multi-Channel Support", "Remote Access", "Large Storage", "Smart Analytics", "Backup & Export"]
+    },
+    "mobile": {
+      "title": "Mobile Connection",
+      "description": "Connect your surveillance system to your smartphone or tablet for real-time monitoring from anywhere in the world.",
+      "features": ["Live View", "Push Notifications", "Playback", "Cloud Storage", "Multi-Device Access"]
+    },
+    "maintenance": {
+      "title": "Periodic Maintenance",
+      "description": "Regular maintenance and inspection services to ensure your security systems are always operating at peak performance.",
+      "features": ["Regular Inspections", "System Updates", "Cleaning & Adjustment", "Emergency Repairs", "Performance Reports"]
+    },
+    "security": {
+      "title": "Security Systems",
+      "description": "Comprehensive security solutions including alarm systems, access control, and integrated security management for complete protection.",
+      "features": ["Alarm Systems", "Access Control", "Perimeter Protection", "Fire Detection", "Integration"]
+    },
+    "requestQuote": "Request a Quote",
+    "learnMore": "Learn More"
+  },
+  "projects": {
+    "title": "Our Projects",
+    "subtitle": "Explore our portfolio of successful security installations",
+    "filter": {
+      "all": "All Projects",
+      "residential": "Residential",
+      "commercial": "Commercial",
+      "industrial": "Industrial"
+    },
+    "details": {
+      "location": "Location",
+      "system": "System Type",
+      "cameras": "Cameras",
+      "features": "Features"
+    },
+    "project1": {
+      "name": "ABC Company Headquarters",
+      "location": "Kuwait City",
+      "system": "IP Camera System",
+      "cameras": "12 cameras",
+      "features": "Mobile connection, NVR recording",
+      "category": "commercial"
+    },
+    "project2": {
+      "name": "Al-Sabah Residential Complex",
+      "location": "Salmiya",
+      "system": "Hybrid DVR System",
+      "cameras": "8 cameras",
+      "features": "Night vision, motion detection",
+      "category": "residential"
+    },
+    "project3": {
+      "name": "Industrial Warehouse - Shuwaikh",
+      "location": "Shuwaikh Industrial",
+      "system": "IP Camera System",
+      "cameras": "24 cameras",
+      "features": "24/7 monitoring, perimeter alerts",
+      "category": "industrial"
+    },
+    "project4": {
+      "name": "Retail Chain Store",
+      "location": "The Avenues Mall",
+      "system": "IP Camera System",
+      "cameras": "16 cameras",
+      "features": "People counting, analytics",
+      "category": "commercial"
+    },
+    "project5": {
+      "name": "Private Villa Security",
+      "location": "Abdullah Al-Salem",
+      "system": "Smart Home Security",
+      "cameras": "6 cameras",
+      "features": "Smart alerts, doorbell camera",
+      "category": "residential"
+    },
+    "project6": {
+      "name": "School Campus Security",
+      "location": "Jabriya",
+      "system": "IP Camera System",
+      "cameras": "32 cameras",
+      "features": "Full coverage, emergency alerts",
+      "category": "commercial"
+    }
+  },
+  "quote": {
+    "title": "Request a Quote",
+    "subtitle": "Fill out the form below and we'll get back to you within 24 hours",
+    "form": {
+      "name": "Full Name",
+      "namePlaceholder": "Enter your name",
+      "phone": "Phone Number",
+      "phonePlaceholder": "+965 XXXX XXXX",
+      "email": "Email Address",
+      "emailPlaceholder": "your@email.com",
+      "service": "Service Type",
+      "servicePlaceholder": "Select a service",
+      "description": "Project Description",
+      "descriptionPlaceholder": "Describe your security needs...",
+      "submit": "Submit Request",
+      "submitting": "Submitting...",
+      "success": "Your request has been submitted successfully! We'll contact you soon.",
+      "error": "Failed to submit. Please try again or contact us directly."
+    },
+    "serviceOptions": {
+      "indoor": "Indoor Cameras",
+      "outdoor": "Outdoor Cameras",
+      "dvr": "DVR/NVR Systems",
+      "mobile": "Mobile Connection",
+      "maintenance": "Maintenance",
+      "full": "Full Security System"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Get in touch with our team",
+    "info": {
+      "phone": "Phone",
+      "whatsapp": "WhatsApp",
+      "email": "Email",
+      "location": "Location",
+      "instagram": "Instagram",
+      "hours": "Working Hours",
+      "hoursValue": "Saturday - Thursday: 8AM - 8PM"
+    },
+    "form": {
+      "name": "Your Name",
+      "namePlaceholder": "Enter your name",
+      "phone": "Phone Number",
+      "phonePlaceholder": "+965 XXXX XXXX",
+      "email": "Email Address",
+      "emailPlaceholder": "your@email.com",
+      "message": "Message",
+      "messagePlaceholder": "How can we help you?",
+      "submit": "Send Message",
+      "submitting": "Sending...",
+      "success": "Message sent successfully! We'll respond shortly.",
+      "error": "Failed to send. Please try again."
+    },
+    "mapTitle": "Our Service Area",
+    "mapDescription": "We provide services across all areas of Kuwait"
+  },
+  "footer": {
+    "description": "Professional security solutions for homes and businesses across Kuwait. Over 10 years of trusted service.",
+    "quickLinks": "Quick Links",
+    "ourServices": "Our Services",
+    "contactInfo": "Contact Info",
+    "followUs": "Follow Us",
+    "rights": "All rights reserved"
+  }
+}
