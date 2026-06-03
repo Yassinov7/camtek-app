@@ -30,7 +30,7 @@ export function generateSeoMetadata({ title, description, locale, path }: SeoPro
       type: 'website',
       images: [
         {
-          url: '/images/og-image.jpg',
+          url: '/offer1.jpeg',
           width: 1200,
           height: 630,
           alt: `${COMPANY.name} - ${title}`,
@@ -41,7 +41,7 @@ export function generateSeoMetadata({ title, description, locale, path }: SeoPro
       card: 'summary_large_image',
       title: `${title} | ${COMPANY.name}`,
       description,
-      images: ['/images/og-image.jpg'],
+      images: ['/offer1.jpeg'],
     },
   };
 }
