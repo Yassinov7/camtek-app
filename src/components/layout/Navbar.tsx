@@ -30,42 +30,58 @@ export default function Navbar({ locale, dict }: NavbarProps) {
     label: dict.nav[link.key as keyof typeof dict.nav],
   }));
 
+  const baseText = scrolled ? 'text-gray-700' : 'text-white';
+  const linkBase = scrolled ? 'hover:bg-gray-100 text-gray-700' : 'hover:bg-white/15 text-white';
+  const buttonStyles = scrolled
+    ? 'bg-primary text-white hover:bg-blue-700 shadow-lg shadow-primary/20'
+    : 'bg-white text-primary hover:bg-slate-100 shadow-lg shadow-white/20';
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-white'
+        scrolled ? 'bg-white/95 backdrop-blur-md shadow-xl' : 'bg-transparent'
       }`}
     >
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-20 items-center justify-between">
+        <div className="flex h-24 items-center justify-between gap-4">
           {/* Logo */}
-          <Link href={`/${locale}`} className="flex items-center gap-2">
-            <img src="/logo.jpeg" alt={isRtl ? COMPANY.nameAr : COMPANY.name} className="w-12 h-12 rounded-lg object-cover" />
+          <Link href={`/${locale}`} className="flex items-center gap-3">
+            <img
+              src="/logo.jpeg"
+              alt={isRtl ? COMPANY.nameAr : COMPANY.name}
+              className="w-12 h-12 rounded-2xl object-cover border border-white/20 bg-white/10"
+            />
             <div className={`flex flex-col ${isRtl ? 'items-end' : 'items-start'}`}>
-              <span className="text-xl font-bold text-primary">
+              <span className={`text-xl font-bold ${baseText}`}>
                 {isRtl ? COMPANY.nameAr : COMPANY.name}
               </span>
-              <span className="text-xs text-gray-500">
+              <span className={`text-xs ${scrolled ? 'text-gray-500' : 'text-white/80'}`}>
                 {isRtl ? COMPANY.taglineAr : COMPANY.tagline}
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-2">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                   pathname === item.href
-                    ? 'bg-primary text-white'
-                    : 'text-gray-700 hover:bg-gray-100'
+                    ? 'bg-primary text-white shadow-lg shadow-primary/20'
+                    : linkBase
                 }`}
               >
                 {item.label}
               </Link>
             ))}
+            <Link
+              href={`/${locale}/quote`}
+              className={`hidden xl:inline-flex items-center px-5 py-3 rounded-full text-sm font-semibold transition ${buttonStyles}`}
+            >
+              {dict.nav.quote}
+            </Link>
             <LanguageSwitcher locale={locale} />
           </div>
 
@@ -74,7 +90,7 @@ export default function Navbar({ locale, dict }: NavbarProps) {
             <LanguageSwitcher locale={locale} />
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
+              className={`p-2 rounded-lg transition-colors ${scrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/10'}`}
               aria-label="Toggle menu"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -98,16 +114,16 @@ export default function Navbar({ locale, dict }: NavbarProps) {
               transition={{ duration: 0.3 }}
               className="lg:hidden overflow-hidden"
             >
-              <div className="py-4 space-y-2 border-t border-gray-100">
+              <div className="py-4 space-y-2 border-t border-white/10 bg-white/95 backdrop-blur-md">
                 {navItems.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
                     onClick={() => setIsOpen(false)}
-                    className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 ${
+                    className={`block px-4 py-3 rounded-2xl text-base font-medium transition-all duration-300 ${
                       pathname === item.href
                         ? 'bg-primary text-white'
-                        : 'text-gray-700 hover:bg-gray-50'
+                        : 'text-gray-700 hover:bg-gray-100'
                     }`}
                   >
                     {item.label}

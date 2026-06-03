@@ -44,12 +44,48 @@ export default async function LocaleLayout({
   const isRtl = locale === 'ar';
   const dir = isRtl ? 'rtl' : 'ltr';
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: isRtl ? 'كامتيك للحلول الأمنية' : 'CamTek Security Solutions',
+    description: isRtl
+      ? 'تركيب احترافي لكاميرات المراقبة للمنازل والشركات والمصانع في جميع أنحاء الكويت'
+      : 'Professional surveillance camera installation for homes, businesses, and industries across Kuwait',
+    url: 'https://camtek.kw',
+    telephone: '+96555222997',
+    image: 'https://camtek.kw/offer1.jpeg',
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'KW',
+      addressLocality: isRtl ? 'الكويت' : 'Kuwait',
+    },
+    areaServed: {
+      '@type': 'Country',
+      name: isRtl ? 'الكويت' : 'Kuwait',
+    },
+    priceRange: '$$',
+    openingHours: 'Sa-Th 08:00-20:00',
+    sameAs: ['https://www.instagram.com/camtek.ku'],
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '5',
+      reviewCount: '100',
+    },
+  };
+
   return (
     <html
       lang={locale}
       dir={dir}
+      data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} ${notoArabic.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-white text-gray-900">
         <Navbar locale={locale} dict={dict} />
         <main className="flex-1">{children}</main>

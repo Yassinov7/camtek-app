@@ -27,6 +27,8 @@ function StarRating({ rating }: { rating: number }) {
   );
 }
 
+const testimonialKeys = ['t1', 't2', 't3', 't4'] as const;
+
 export default function Testimonials({ dict }: TestimonialsProps) {
   return (
     <section className="py-20 bg-white">
@@ -37,25 +39,34 @@ export default function Testimonials({ dict }: TestimonialsProps) {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={testimonial.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="bg-gray-50 rounded-2xl p-6 hover:shadow-lg transition-all duration-300"
-            >
-              <StarRating rating={testimonial.rating} />
-              <p className="mt-4 text-gray-600 text-sm leading-relaxed italic">
-                &ldquo;{testimonial.text}&rdquo;
-              </p>
-              <div className="mt-6 pt-4 border-t border-gray-200">
-                <p className="font-semibold text-gray-900">{testimonial.name}</p>
-                <p className="text-sm text-gray-500">{testimonial.company}</p>
-              </div>
-            </motion.div>
-          ))}
+          {testimonials.map((testimonial, index) => {
+            const key = testimonialKeys[index];
+            const translated = dict.home.testimonials[key as keyof typeof dict.home.testimonials] as {
+              name: string;
+              company: string;
+              text: string;
+            } | undefined;
+
+            return (
+              <motion.div
+                key={testimonial.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                className="bg-gray-50 rounded-2xl p-6 hover:shadow-lg transition-all duration-300"
+              >
+                <StarRating rating={testimonial.rating} />
+                <p className="mt-4 text-gray-600 text-sm leading-relaxed italic">
+                  &ldquo;{translated?.text || testimonial.text}&rdquo;
+                </p>
+                <div className="mt-6 pt-4 border-t border-gray-200">
+                  <p className="font-semibold text-gray-900">{translated?.name || testimonial.name}</p>
+                  <p className="text-sm text-gray-500">{translated?.company || testimonial.company}</p>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </Container>
     </section>
