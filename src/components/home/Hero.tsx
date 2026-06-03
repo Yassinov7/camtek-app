@@ -21,10 +21,9 @@ export default function Hero({ locale, dict }: HeroProps) {
           muted
           loop
           playsInline
-          poster="/images/hero-poster.jpg"
           className="w-full h-full object-cover"
         >
-          <source src="/videos/hero-video.mp4" type="video/mp4" />
+          <source src="/video.mp4" type="video/mp4" />
         </video>
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />

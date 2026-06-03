@@ -3,32 +3,32 @@ import { Project } from '@/types/project';
 export const projects: Project[] = [
   {
     id: 'project1',
-    image: '/images/projects/project1.jpg',
+    image: '/offer1.jpeg',
     category: 'commercial',
   },
   {
     id: 'project2',
-    image: '/images/projects/project2.jpg',
+    image: '/offer2.jpeg',
     category: 'residential',
   },
   {
     id: 'project3',
-    image: '/images/projects/project3.jpg',
+    image: '/offer3.jpeg',
     category: 'industrial',
   },
   {
     id: 'project4',
-    image: '/images/projects/project4.jpg',
+    image: '/offer4.jpeg',
     category: 'commercial',
   },
   {
     id: 'project5',
-    image: '/images/projects/project5.jpg',
+    image: '/offer5.jpeg',
     category: 'residential',
   },
   {
     id: 'project6',
-    image: '/images/projects/project6.jpg',
+    image: '/offer6.jpeg',
     category: 'commercial',
   },
 ];
