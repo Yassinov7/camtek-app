@@ -55,7 +55,7 @@ export default function Footer({ locale, dict }: FooterProps) {
               {' '}
               <SatelliteAlrajaaLink
                 label={isRtl ? 'ستلايت الرجاء' : 'Satellite Alrajaa'}
-                title={isRtl ? 'مزوّد IPTV وتقنية الأقمار الصناعية وتغطية كأس العالم' : 'IPTV provider, satellite technology and World Cup coverage'}
+                title={isRtl ? 'لمشاهدة خدمات IPTV وتقنيات الستلايت مكتبات افلام ومسلسلات ضخمة، وتغطية كأس العالم، قم بزيارة' : 'For IPTV service, satellite technology, Movies And Series Huge Library, and World Cup coverage, visit'}
                 className="text-blue-400 hover:text-orange-400 transition font-semibold"
               />
             </p>
