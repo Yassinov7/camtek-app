@@ -7,10 +7,12 @@ import type { Dictionary } from '@/i18n/dictionaries';
 import { projects } from '@/data/projects';
 
 interface ProjectGalleryProps {
+  locale: string;
   dict: Dictionary;
 }
 
-export default function ProjectGallery({ dict }: ProjectGalleryProps) {
+export default function ProjectGallery(props: ProjectGalleryProps) {
+  const { dict } = props;
   const [filter, setFilter] = useState<string>('all');
 
   const filters = [
