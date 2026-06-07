@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { COMPANY, NAV_LINKS, SOCIAL_LINKS } from '@/lib/constants';
+import { COMPANY, NAV_LINKS, SOCIAL_LINKS, DEVELOPER } from '@/lib/constants';
 import Image from 'next/image';
 import { services } from '@/data/services';
 import type { Dictionary } from '@/i18n/dictionaries';
@@ -156,11 +156,20 @@ export default function Footer({ locale, dict }: FooterProps) {
       {/* Copyright */}
       <div className="border-t border-gray-800">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
-          <p className="text-center text-sm text-gray-500">
-            {isRtl
-              ? `© ${currentYear} ${COMPANY.nameAr}. ${dict.footer.rights}.`
-              : `© ${currentYear} ${COMPANY.name}. ${dict.footer.rights}.`}
-          </p>
+          <div className="text-center mt-2">
+            <p className="text-sm text-gray-500">
+              {isRtl
+                ? `© ${currentYear} ${COMPANY.nameAr}. ${dict.footer.rights}.`
+                : `© ${currentYear} ${COMPANY.name}. ${dict.footer.rights}.`}
+            </p>
+            <p className="text-xs text-gray-400 mt-1">
+              {dict.footer.developerCredit.split('•')[0].trim()}
+              {' '}
+              <a href={DEVELOPER.instagramUrl} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white ml-1">
+                {`@${DEVELOPER.instagram}`}
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </footer>

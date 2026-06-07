@@ -24,7 +24,7 @@
       "title": "Protect What Matters Most",
       "subtitle": "Premium CCTV systems and security installations for homes, businesses, and industrial facilities across Kuwait.",
       "ctaWhatsapp": "Message Us on WhatsApp",
-      "ctaQuote": "Get a Free Quote",
+      "ctaQuote": "Get a Quote",
       "badge": "Trusted, licensed, and insured",
       "features": [
         {
@@ -377,6 +377,8 @@
     "ourServices": "Our Services",
     "contactInfo": "Contact Info",
     "followUs": "Follow Us",
-    "rights": "All rights reserved"
+    "rights": "All rights reserved",
+    "developerCredit": "Site built & maintained by mhmmdyassine (Software Engineer) — +963 935 787 445 • Instagram: @mhmmdyassine",
+    "developerLinkText": "Built by"
   }
 }

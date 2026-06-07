@@ -92,9 +92,9 @@ export default async function LocaleLayout({
         <Navbar locale={locale} dict={dict} />
         <main className="flex-1">{children}</main>
         <Footer locale={locale} dict={dict} />
+        <InstagramButton locale={locale} href={COMPANY.instagramPrimaryUrl} handle={COMPANY.instagramPrimary} offsetClass="right-6" bottomOffset={152} />
+        <InstagramButton locale={locale} href={COMPANY.instagramSecondaryUrl} handle={COMPANY.instagramSecondary} offsetClass="right-6" bottomOffset={88} />
         <WhatsAppButton locale={locale} />
-        <InstagramButton locale={locale} href={COMPANY.instagramPrimaryUrl} handle={COMPANY.instagramPrimary} offsetClass="right-20" />
-        <InstagramButton locale={locale} href={COMPANY.instagramSecondaryUrl} handle={COMPANY.instagramSecondary} offsetClass="right-36" />
       </body>
     </html>
   );

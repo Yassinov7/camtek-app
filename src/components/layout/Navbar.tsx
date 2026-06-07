@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import LanguageSwitcher from './LanguageSwitcher';
-import { NAV_LINKS, COMPANY } from '@/lib/constants';
+import { NAV_LINKS, COMPANY, DEVELOPER } from '@/lib/constants';
 import type { Dictionary } from '@/i18n/dictionaries';
 
 interface NavbarProps {
@@ -125,6 +125,18 @@ export default function Navbar({ locale, dict }: NavbarProps) {
                     {item.label}
                   </Link>
                 ))}
+                <div className="border-t mt-3 pt-3 px-4">
+                  <p className="text-xs text-gray-500">{dict.footer.developerLinkText}</p>
+                  <div className="flex items-center gap-2 mt-1">
+                    <div className="text-sm font-medium text-gray-700">{DEVELOPER.name} ({DEVELOPER.role})</div>
+                    <a href={`tel:${DEVELOPER.phone}`} className="text-sm text-primary">{DEVELOPER.phone}</a>
+                  </div>
+                  <div className="mt-2">
+                    <a href={DEVELOPER.instagramUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-gray-400 hover:text-primary">
+                      {`@${DEVELOPER.instagram}`}
+                    </a>
+                  </div>
+                </div>
               </div>
             </motion.div>
           )}

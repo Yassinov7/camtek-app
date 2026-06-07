@@ -29,3 +29,11 @@ export const SOCIAL_LINKS = [
   { name: 'Instagram', url: COMPANY.instagramPrimaryUrl, handle: COMPANY.instagramPrimary },
   { name: 'Instagram', url: COMPANY.instagramSecondaryUrl, handle: COMPANY.instagramSecondary },
 ] as const;
+
+export const DEVELOPER = {
+  name: 'mhmmdyassine',
+  role: 'Software Engineer',
+  phone: '+963935787445',
+  instagram: 'mhmmdyassine',
+  instagramUrl: 'https://instagram.com/mhmmdyassine',
+};

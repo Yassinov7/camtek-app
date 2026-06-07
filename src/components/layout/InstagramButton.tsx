@@ -7,9 +7,10 @@ interface InstagramButtonProps {
   href: string;
   handle: string;
   offsetClass?: string;
+  bottomOffset?: number; // pixels from bottom
 }
 
-export default function InstagramButton({ locale, href, handle, offsetClass = 'right-20' }: InstagramButtonProps) {
+export default function InstagramButton({ locale, href, handle, offsetClass = 'right-6', bottomOffset = 24 }: InstagramButtonProps) {
   const isRtl = locale === 'ar';
   const position = isRtl ? offsetClass.replace('right', 'left') : offsetClass;
 
@@ -19,7 +20,8 @@ export default function InstagramButton({ locale, href, handle, offsetClass = 'r
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Follow us on Instagram @${handle}`}
-      className={`fixed bottom-6 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-pink-500 via-orange-400 to-yellow-400 text-white shadow-lg hover:opacity-95 transition-all duration-300 ${position}`}
+      className={`fixed z-50 flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-pink-500 via-orange-400 to-yellow-400 text-white shadow-lg hover:opacity-95 transition-all duration-300 ${position}`}
+      style={{ bottom: `${bottomOffset}px` }}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       initial={{ opacity: 0, y: 20 }}
