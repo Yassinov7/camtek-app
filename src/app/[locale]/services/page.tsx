@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation';
 import { hasLocale, getDictionary } from '@/i18n/dictionaries';
 import { generateSeoMetadata } from '@/lib/seo';
 import Container from '@/components/shared/Container';
-import SectionTitle from '@/components/shared/SectionTitle';
 import { services } from '@/data/services';
 import { ReactNode } from 'react';
 
@@ -63,7 +62,7 @@ export default async function ServicesPage({
   return (
     <div className="pt-20">
       {/* Hero banner */}
-      <div className="bg-gradient-to-r from-primary to-blue-700 py-20">
+      <div className="bg-linear-to-r from-primary to-blue-700 py-20">
         <Container>
           <div className="text-center text-white">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">{dict.services.title}</h1>
@@ -72,11 +71,35 @@ export default async function ServicesPage({
         </Container>
       </div>
 
+      <section className="py-16 bg-slate-50">
+        <Container>
+          <div className="rounded-4xl bg-white p-10 shadow-xl border border-gray-100">
+            <div className="grid gap-8 lg:grid-cols-2 items-center">
+              <div>
+                <h2 className="text-3xl font-bold text-gray-900 mb-4">{dict.about.brands.title}</h2>
+                <p className="text-gray-600 leading-relaxed">{dict.about.brands.description}</p>
+                <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
+                  {dict.about.brands.items.map((brand) => (
+                    <span key={brand} className="rounded-3xl border border-gray-200 bg-slate-50 px-4 py-3 text-center text-sm font-semibold text-gray-900">
+                      {brand}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="rounded-4xl bg-primary/5 p-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">{dict.about.brands.quality.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{dict.about.brands.quality.description}</p>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
       {/* Services grid */}
       <section className="py-20">
         <Container>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => {
+            {services.map((service) => {
               const serviceData = dict.services[service.id as keyof typeof dict.services] as {
                 title: string;
                 description: string;
@@ -100,7 +123,7 @@ export default async function ServicesPage({
                   <ul className="space-y-2">
                     {(serviceData?.features || service.features).map((feature, i) => (
                       <li key={i} className="flex items-center gap-2 text-sm text-gray-700">
-                        <svg className="w-5 h-5 text-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-5 h-5 text-green shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                         {feature}

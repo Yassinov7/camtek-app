@@ -75,15 +75,15 @@ export default async function ContactPage({
         </svg>
       ),
       label: dict.contact.info.instagram,
-      value: `@${COMPANY.instagram}`,
-      href: COMPANY.instagramUrl,
+      value: `@${COMPANY.instagramPrimary}`,
+      href: COMPANY.instagramPrimaryUrl,
     },
   ];
 
   return (
     <div className="pt-20">
       {/* Hero banner */}
-      <div className="bg-gradient-to-r from-primary to-blue-700 py-20">
+      <div className="bg-linear-to-r from-primary to-blue-700 py-20">
         <Container>
           <div className="text-center text-white">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">{dict.contact.title}</h1>
@@ -136,6 +136,24 @@ export default async function ContactPage({
                 <ContactForm locale={locale} dict={dict} />
               </div>
             </div>
+          </div>
+        </Container>
+      </section>
+
+      <section className="pb-20">
+        <Container>
+          <div className="rounded-4xl overflow-hidden border border-gray-200 shadow-lg">
+            <div className="bg-primary/10 px-8 py-6">
+              <h2 className="text-3xl font-bold text-gray-900">{dict.contact.mapTitle}</h2>
+              <p className="mt-3 text-gray-600 max-w-3xl">{dict.contact.mapDescription}</p>
+            </div>
+            <iframe
+              title="CamTek location in Kuwait"
+              src="https://www.google.com/maps?q=Kuwait+City&output=embed"
+              className="w-full h-[420px] border-0"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
         </Container>
       </section>

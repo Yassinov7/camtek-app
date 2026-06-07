@@ -14,7 +14,7 @@
     "home": "Home",
     "about": "About Us",
     "services": "Services",
-    "projects": "Projects",
+    "projects": "Projects & Works",
     "faq": "FAQ",
     "quote": "Request Quote",
     "contact": "Contact"
@@ -84,8 +84,8 @@
       }
     },
     "projects": {
-      "title": "Recent Projects",
-      "subtitle": "See some of our latest security installations",
+      "title": "Our Projects & Works",
+      "subtitle": "Explore key security installations from our portfolio across Kuwait",
       "viewAll": "View All Projects"
     },
     "testimonials": {
@@ -156,6 +156,10 @@
       {
         "question": "Is remote monitoring available with your CCTV solutions?",
         "answer": "Yes. Remote monitoring and alerting options are available so your system can notify you and our support team when important events occur."
+      },
+      {
+        "question": "Which camera brands and security systems do you install?",
+        "answer": "We install trusted camera brands such as Hikvision, Dahua, Bosch, and Axis with DVR, NVR, and smart home integration systems."
       }
     ],
     "contactPrompt": "Have more questions? Our team is ready to help.",
@@ -199,6 +203,15 @@
       "years": "10+",
       "title": "Years of Excellence",
       "description": "Serving Kuwait with professional security solutions since 2014"
+    },
+    "brands": {
+      "title": "Trusted Brands & Systems",
+      "description": "We install premium brands and deploy complete systems for clear, reliable surveillance and smart security management.",
+      "items": ["Hikvision", "Dahua", "Bosch", "Axis", "Samsung"],
+      "quality": {
+        "title": "Professional Service Quality",
+        "description": "Every installation follows clear standards, professional planning, and thorough testing to deliver long-term peace of mind."
+      }
     }
   },
   "services": {
@@ -238,8 +251,8 @@
     "learnMore": "Learn More"
   },
   "projects": {
-    "title": "Our Projects",
-    "subtitle": "Explore our portfolio of successful security installations",
+    "title": "Our Projects & Works",
+    "subtitle": "Explore our portfolio of successful security and integrated protection projects",
     "filter": {
       "all": "All Projects",
       "residential": "Residential",

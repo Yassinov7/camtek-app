@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import SectionTitle from '@/components/shared/SectionTitle';
 import Container from '@/components/shared/Container';
 import Button from '@/components/shared/Button';
@@ -43,11 +44,12 @@ export default function ProjectsPreview({ locale, dict }: ProjectsPreviewProps) 
                 className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group"
               >
                 {/* Project Image */}
-                <div className="relative h-48 overflow-hidden">
-                  <img
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <Image
                     src={project.image}
                     alt={projectData?.name || project.id}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-4 left-4">
                     <span className={`px-3 py-1 rounded-full text-xs font-semibold text-white ${

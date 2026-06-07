@@ -14,6 +14,7 @@ export function generateSeoMetadata({ title, description, locale, path }: SeoPro
   return {
     title: `${title} | ${COMPANY.name} ${COMPANY.tagline}`,
     description,
+    keywords: [title, COMPANY.name, 'CCTV', 'security systems', 'surveillance', 'Kuwait', 'camera installation'],
     alternates: {
       canonical: url,
       languages: {

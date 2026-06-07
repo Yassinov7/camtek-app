@@ -31,9 +31,9 @@ export default async function HomePage({
   return (
     <>
       <Hero locale={locale} dict={dict} />
-      <ServicesPreview locale={locale} dict={dict} />
-      <WhyChooseUs dict={dict} />
       <ProjectsPreview locale={locale} dict={dict} />
+      <WhyChooseUs dict={dict} />
+      <ServicesPreview locale={locale} dict={dict} />
       <Testimonials dict={dict} />
       <CTA locale={locale} dict={dict} />
     </>

@@ -31,11 +31,8 @@ export default function CTA({ locale, dict }: CTAProps) {
                 {dict.home.cta.subtitle}
               </p>
             </div>
-            <div className="flex flex-col gap-4 sm:flex-row sm:justify-end">
-              <Button href={`/${locale}/contact`} variant="secondary" size="lg">
-                {dict.home.cta.contactUs}
-              </Button>
-              <Button href={`/${locale}/quote`} variant="gold" size="lg">
+            <div className="flex justify-center sm:justify-end">
+              <Button href={`/${locale}/contact`} variant="gold" size="lg">
                 {dict.home.cta.getQuote}
               </Button>
             </div>

@@ -48,7 +48,7 @@ export default function SectionTitle({
         whileInView={{ opacity: 1, scaleX: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className={`h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full mt-6 ${
+        className={`h-1 w-20 bg-linear-to-r from-primary to-secondary rounded-full mt-6 ${
           align === 'center' ? 'mx-auto' : align === 'right' ? 'ml-auto' : ''
         }`}
       />

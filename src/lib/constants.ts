@@ -7,8 +7,10 @@ export const COMPANY = {
   whatsapp: '+965 55222997',
   whatsappLink: 'https://wa.me/96555222997',
   email: 'info@camtek.kw',
-  instagram: 'camtek.ku',
-  instagramUrl: 'https://instagram.com/camtek.ku',
+  instagramPrimary: 's.h.s.cctv',
+  instagramPrimaryUrl: 'https://instagram.com/s.h.s.cctv',
+  instagramSecondary: 'camtek.ku',
+  instagramSecondaryUrl: 'https://instagram.com/camtek.ku',
   location: 'Kuwait',
   locationAr: 'الكويت',
   yearsOfExperience: 10,
@@ -20,10 +22,10 @@ export const NAV_LINKS = [
   { key: 'services', href: '/services' },
   { key: 'projects', href: '/projects' },
   { key: 'faq', href: '/faq' },
-  { key: 'quote', href: '/quote' },
   { key: 'contact', href: '/contact' },
 ] as const;
 
 export const SOCIAL_LINKS = [
-  { name: 'Instagram', url: COMPANY.instagramUrl, icon: 'Instagram' },
+  { name: 'Instagram', url: COMPANY.instagramPrimaryUrl, handle: COMPANY.instagramPrimary },
+  { name: 'Instagram', url: COMPANY.instagramSecondaryUrl, handle: COMPANY.instagramSecondary },
 ] as const;

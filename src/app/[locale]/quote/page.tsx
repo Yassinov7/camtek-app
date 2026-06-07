@@ -27,7 +27,7 @@ export default async function QuotePage({
   return (
     <div className="pt-20">
       {/* Hero banner */}
-      <div className="bg-gradient-to-r from-secondary to-orange-600 py-20">
+      <div className="bg-linear-to-r from-secondary to-orange-600 py-20">
         <Container>
           <div className="text-center text-white">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">{dict.quote.title}</h1>

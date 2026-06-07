@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import { locales } from '@/i18n/config';
 
-const pages = ['', '/about', '/services', '/projects', '/quote', '/contact'];
+const pages = ['', '/about', '/services', '/projects', '/contact'];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://camtek.kw';

@@ -62,7 +62,7 @@ export default function Hero({ locale, dict }: HeroProps) {
                   {dict.home.hero.ctaWhatsapp}
                 </Button>
               </Link>
-              <Button href={`/${locale}/quote`} variant="secondary" size="lg">
+              <Button href={`/${locale}/contact`} variant="secondary" size="lg">
                 {dict.home.hero.ctaQuote}
               </Button>
             </motion.div>

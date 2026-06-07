@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import LanguageSwitcher from './LanguageSwitcher';
@@ -30,32 +31,31 @@ export default function Navbar({ locale, dict }: NavbarProps) {
     label: dict.nav[link.key as keyof typeof dict.nav],
   }));
 
-  const baseText = scrolled ? 'text-gray-700' : 'text-white';
-  const linkBase = scrolled ? 'hover:bg-gray-100 text-gray-700' : 'hover:bg-white/15 text-white';
-  const buttonStyles = scrolled
-    ? 'bg-primary text-white hover:bg-blue-700 shadow-lg shadow-primary/20'
-    : 'bg-white text-primary hover:bg-slate-100 shadow-lg shadow-white/20';
+  const isHome = pathname === `/${locale}` || pathname === `/${locale}/`;
+  const showTransparent = isHome && !scrolled;
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled ? 'bg-white/95 backdrop-blur-md shadow-xl' : 'bg-transparent'
+        showTransparent ? 'bg-transparent' : 'bg-white/95 backdrop-blur-md shadow-xl'
       }`}
     >
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-24 items-center justify-between gap-4">
           {/* Logo */}
           <Link href={`/${locale}`} className="flex items-center gap-3">
-            <img
+            <Image
               src="/logo.jpeg"
               alt={isRtl ? COMPANY.nameAr : COMPANY.name}
+              width={48}
+              height={48}
               className="w-12 h-12 rounded-2xl object-cover border border-white/20 bg-white/10"
             />
             <div className={`flex flex-col ${isRtl ? 'items-end' : 'items-start'}`}>
-              <span className={`text-xl font-bold ${baseText}`}>
+                <span className={`text-xl font-bold ${showTransparent ? 'text-white' : 'text-gray-700'}`}>
                 {isRtl ? COMPANY.nameAr : COMPANY.name}
               </span>
-              <span className={`text-xs ${scrolled ? 'text-gray-500' : 'text-white/80'}`}>
+                <span className={`text-xs ${showTransparent ? 'text-white/80' : 'text-gray-500'}`}>
                 {isRtl ? COMPANY.taglineAr : COMPANY.tagline}
               </span>
             </div>
@@ -70,18 +70,14 @@ export default function Navbar({ locale, dict }: NavbarProps) {
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                   pathname === item.href
                     ? 'bg-primary text-white shadow-lg shadow-primary/20'
-                    : linkBase
+                    : showTransparent
+                    ? 'hover:bg-white/15 text-white'
+                    : 'hover:bg-gray-100 text-gray-700'
                 }`}
               >
                 {item.label}
               </Link>
             ))}
-            <Link
-              href={`/${locale}/quote`}
-              className={`hidden xl:inline-flex items-center px-5 py-3 rounded-full text-sm font-semibold transition ${buttonStyles}`}
-            >
-              {dict.nav.quote}
-            </Link>
             <LanguageSwitcher locale={locale} />
           </div>
 

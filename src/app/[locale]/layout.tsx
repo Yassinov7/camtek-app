@@ -5,6 +5,8 @@ import { getDictionary, hasLocale } from '@/i18n/dictionaries';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import WhatsAppButton from '@/components/layout/WhatsAppButton';
+import InstagramButton from '@/components/layout/InstagramButton';
+import { COMPANY } from '@/lib/constants';
 import '@/app/globals.css';
 
 const geistSans = Geist({
@@ -91,6 +93,8 @@ export default async function LocaleLayout({
         <main className="flex-1">{children}</main>
         <Footer locale={locale} dict={dict} />
         <WhatsAppButton locale={locale} />
+        <InstagramButton locale={locale} href={COMPANY.instagramPrimaryUrl} handle={COMPANY.instagramPrimary} offsetClass="right-20" />
+        <InstagramButton locale={locale} href={COMPANY.instagramSecondaryUrl} handle={COMPANY.instagramSecondary} offsetClass="right-36" />
       </body>
     </html>
   );

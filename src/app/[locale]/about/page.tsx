@@ -3,7 +3,6 @@ import { hasLocale, getDictionary } from '@/i18n/dictionaries';
 import { generateSeoMetadata } from '@/lib/seo';
 import Container from '@/components/shared/Container';
 import SectionTitle from '@/components/shared/SectionTitle';
-import { COMPANY } from '@/lib/constants';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -24,12 +23,11 @@ export default async function AboutPage({
   const { locale } = await params;
   if (!hasLocale(locale)) notFound();
   const dict = await getDictionary(locale);
-  const isRtl = locale === 'ar';
 
   return (
     <div className="pt-20">
       {/* Hero banner */}
-      <div className="bg-gradient-to-r from-primary to-blue-700 py-20">
+      <div className="bg-linear-to-r from-primary to-blue-700 py-20">
         <Container>
           <div className="text-center text-white">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">{dict.about.title}</h1>
@@ -48,7 +46,7 @@ export default async function AboutPage({
                 {dict.about.story.description}
               </p>
             </div>
-            <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl p-12 flex items-center justify-center">
+            <div className="bg-linear-to-br from-primary/10 to-secondary/10 rounded-2xl p-12 flex items-center justify-center">
               <div className="text-center">
                 <div className="text-6xl font-bold text-primary mb-2">{dict.about.experience.years}</div>
                 <h3 className="text-2xl font-semibold text-gray-900">{dict.about.experience.title}</h3>
@@ -81,6 +79,31 @@ export default async function AboutPage({
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">{dict.about.mission.title}</h3>
               <p className="text-gray-600 leading-relaxed">{dict.about.mission.description}</p>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Trusted Brands */}
+      <section className="py-20 bg-slate-50">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-[1.4fr_0.6fr] items-center">
+            <div>
+              <SectionTitle title={dict.about.brands.title} />
+              <p className="mt-4 text-gray-600 max-w-3xl leading-relaxed">
+                {dict.about.brands.description}
+              </p>
+              <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3">
+                {dict.about.brands.items.map((brand) => (
+                  <span key={brand} className="rounded-3xl border border-gray-200 bg-white px-4 py-3 text-center text-sm font-semibold text-gray-900 shadow-sm">
+                    {brand}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="rounded-4xl bg-white p-10 shadow-lg border border-gray-100">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">{dict.about.brands.quality.title}</h3>
+              <p className="text-gray-600 leading-relaxed">{dict.about.brands.quality.description}</p>
             </div>
           </div>
         </Container>

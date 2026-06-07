@@ -27,7 +27,7 @@ export default async function ProjectsPage({
   return (
     <div className="pt-20">
       {/* Hero banner */}
-      <div className="bg-gradient-to-r from-primary to-blue-700 py-20">
+      <div className="bg-linear-to-r from-primary to-blue-700 py-20">
         <Container>
           <div className="text-center text-white">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">{dict.projects.title}</h1>
