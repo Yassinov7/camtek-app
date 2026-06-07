@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { COMPANY, NAV_LINKS, SOCIAL_LINKS, DEVELOPER } from '@/lib/constants';
 import Image from 'next/image';
+import SatelliteAlrajaaLink from '@/components/SatelliteAlrajaaLink';
 import { services } from '@/data/services';
 import type { Dictionary } from '@/i18n/dictionaries';
 
@@ -46,6 +47,17 @@ export default function Footer({ locale, dict }: FooterProps) {
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
               {dict.footer.description}
+            </p>
+            <p className="mt-4 text-sm text-gray-400">
+              {isRtl
+                ? 'لمشاهدة خدمات IPTV وتقنيات الستلايت مكتبات افلام ومسلسلات ضخمة، وتغطية كأس العالم، قم بزيارة'
+                : 'For IPTV service, satellite technology, Movies And Series Huge Library, and World Cup coverage, visit'}
+              {' '}
+              <SatelliteAlrajaaLink
+                label={isRtl ? 'ستلايت الرجاء' : 'Satellite Alrajaa'}
+                title={isRtl ? 'مزوّد IPTV وتقنية الأقمار الصناعية وتغطية كأس العالم' : 'IPTV provider, satellite technology and World Cup coverage'}
+                className="text-blue-400 hover:text-orange-400 transition font-semibold"
+              />
             </p>
           </div>
 
