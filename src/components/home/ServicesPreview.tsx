@@ -1,6 +1,7 @@
 'use client';
 
 import { ReactNode } from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import SectionTitle from '@/components/shared/SectionTitle';
 import Container from '@/components/shared/Container';
@@ -9,7 +10,6 @@ import { services } from '@/data/services';
 import type { Dictionary } from '@/i18n/dictionaries';
 
 interface ServicesPreviewProps {
-  locale: string;
   dict: Dictionary;
 }
 
@@ -47,55 +47,54 @@ const iconMap: Record<string, ReactNode> = {
   ),
 };
 
-export default function ServicesPreview({ locale, dict }: ServicesPreviewProps) {
+export default function ServicesPreview({ dict }: ServicesPreviewProps) {
   const featuredServices = services.slice(0, 3);
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-14 sm:py-20 bg-gray-50">
       <Container>
-        <SectionTitle
-          title={dict.home.services.title}
-          subtitle={dict.home.services.subtitle}
-        />
+        <SectionTitle title={dict.home.services.title} subtitle={dict.home.services.subtitle} />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-8">
           {featuredServices.map((service, index) => {
-            const serviceData = dict.services[service.id as keyof typeof dict.services] as { title: string; description: string } | undefined;
-            
+            const serviceData = dict.services[service.id as keyof typeof dict.services] as
+              | { title: string; description: string }
+              | undefined;
+
             return (
               <motion.div
                 key={service.id}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 group"
+                transition={{ delay: index * 0.08, duration: 0.4 }}
+                className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100"
               >
-                <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300 mb-6">
+                <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary mb-5">
                   {iconMap[service.icon] || iconMap.Shield}
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
                   {serviceData?.title || service.id}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-gray-600 text-sm sm:text-base leading-relaxed mb-4">
                   {serviceData?.description || ''}
                 </p>
+                <Link
+                  href={`/services/${service.id}`}
+                  className="text-sm font-semibold text-primary hover:underline"
+                >
+                  {dict.services.learnMore}
+                </Link>
               </motion.div>
             );
           })}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4, duration: 0.5 }}
-          className="text-center mt-12"
-        >
-          <Button href={`/${locale}/services`} variant="outline" size="lg">
+        <div className="text-center mt-10">
+          <Button href="/services" variant="outline" size="lg" className="w-full sm:w-auto min-h-12">
             {dict.home.services.viewAll}
           </Button>
-        </motion.div>
+        </div>
       </Container>
     </section>
   );

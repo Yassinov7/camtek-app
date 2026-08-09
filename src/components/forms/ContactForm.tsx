@@ -5,11 +5,10 @@ import emailjs from '@emailjs/browser';
 import type { Dictionary } from '@/i18n/dictionaries';
 
 interface ContactFormProps {
-  locale: string;
   dict: Dictionary;
 }
 
-export default function ContactForm({ locale, dict }: ContactFormProps) {
+export default function ContactForm({ dict }: ContactFormProps) {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -31,7 +30,7 @@ export default function ContactForm({ locale, dict }: ContactFormProps) {
           from_phone: formData.phone,
           from_email: formData.email,
           message: formData.message,
-          locale,
+          locale: 'ar',
         },
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
       );
@@ -42,72 +41,84 @@ export default function ContactForm({ locale, dict }: ContactFormProps) {
     }
   };
 
+  const inputClass =
+    'w-full min-h-12 px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none text-base';
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <form onSubmit={handleSubmit} className="space-y-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
+          <label htmlFor="contact-name" className="block text-sm font-semibold text-gray-700 mb-2">
             {dict.contact.form.name}
           </label>
           <input
+            id="contact-name"
             type="text"
             required
+            autoComplete="name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             placeholder={dict.contact.form.namePlaceholder}
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 outline-none"
+            className={inputClass}
           />
         </div>
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
+          <label htmlFor="contact-phone" className="block text-sm font-semibold text-gray-700 mb-2">
             {dict.contact.form.phone}
           </label>
           <input
+            id="contact-phone"
             type="tel"
             required
+            autoComplete="tel"
+            inputMode="tel"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             placeholder={dict.contact.form.phonePlaceholder}
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 outline-none"
+            className={inputClass}
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
+        <label htmlFor="contact-email" className="block text-sm font-semibold text-gray-700 mb-2">
           {dict.contact.form.email}
         </label>
         <input
+          id="contact-email"
           type="email"
           required
+          autoComplete="email"
+          inputMode="email"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           placeholder={dict.contact.form.emailPlaceholder}
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 outline-none"
+          className={inputClass}
         />
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
+        <label htmlFor="contact-message" className="block text-sm font-semibold text-gray-700 mb-2">
           {dict.contact.form.message}
         </label>
         <textarea
+          id="contact-message"
           required
           rows={5}
           value={formData.message}
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
           placeholder={dict.contact.form.messagePlaceholder}
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 outline-none resize-none"
+          className={`${inputClass} resize-none`}
         />
       </div>
 
       {status === 'success' && (
-        <div className="p-4 bg-green/10 text-green rounded-lg font-medium">
+        <div role="status" aria-live="polite" className="p-4 bg-green/10 text-green rounded-lg font-medium">
           {dict.contact.form.success}
         </div>
       )}
       {status === 'error' && (
-        <div className="p-4 bg-red-100 text-red-600 rounded-lg font-medium">
+        <div role="alert" className="p-4 bg-red-100 text-red-600 rounded-lg font-medium">
           {dict.contact.form.error}
         </div>
       )}
@@ -115,7 +126,7 @@ export default function ContactForm({ locale, dict }: ContactFormProps) {
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="w-full bg-primary text-white font-semibold py-4 px-8 rounded-lg hover:bg-blue-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-blue-500/25"
+        className="w-full min-h-12 bg-primary text-white font-semibold py-4 px-8 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {status === 'loading' ? dict.contact.form.submitting : dict.contact.form.submit}
       </button>

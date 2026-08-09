@@ -13,7 +13,27 @@ export const COMPANY = {
   instagramSecondaryUrl: 'https://instagram.com/camtek.ku',
   location: 'Kuwait',
   locationAr: 'الكويت',
+  /** Service coverage — update street address when you have a fixed shop pin */
+  addressLocalityAr: 'الكويت',
+  addressCountry: 'KW',
+  mapEmbedUrl:
+    'https://www.google.com/maps?q=Kuwait&hl=ar&z=10&output=embed',
+  mapSearchUrl: 'https://www.google.com/maps/search/?api=1&query=Kuwait',
+  serviceAreas: [
+    'العاصمة',
+    'حولي',
+    'الفروانية',
+    'الجهراء',
+    'الأحمدي',
+    'مبارك الكبير',
+  ],
   yearsOfExperience: 10,
+  openingHoursAr: 'السبت - الخميس: 8 صباحاً - 8 مساءً',
+  openingHoursSpec: {
+    days: ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'] as const,
+    opens: '08:00',
+    closes: '20:00',
+  },
 };
 
 export const NAV_LINKS = [
@@ -22,6 +42,7 @@ export const NAV_LINKS = [
   { key: 'services', href: '/services' },
   { key: 'projects', href: '/projects' },
   { key: 'faq', href: '/faq' },
+  { key: 'quote', href: '/quote' },
   { key: 'contact', href: '/contact' },
 ] as const;
 
@@ -32,7 +53,7 @@ export const SOCIAL_LINKS = [
 
 export const DEVELOPER = {
   name: 'mhmmdyassine',
-  role: 'Software Engineer',
+  role: 'مهندس برمجيات',
   phone: '+963935787445',
   instagram: 'mhmmdyassine',
   instagramUrl: 'https://instagram.com/mhmmdyassine',

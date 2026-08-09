@@ -50,7 +50,7 @@ const features = [
 
 export default function WhyChooseUs({ dict }: WhyChooseUsProps) {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-14 sm:py-20 bg-white">
       <Container>
         <SectionTitle
           title={dict.home.whyUs.title}

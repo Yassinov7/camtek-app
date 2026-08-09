@@ -5,91 +5,113 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
-import LanguageSwitcher from './LanguageSwitcher';
-import { NAV_LINKS, COMPANY, DEVELOPER } from '@/lib/constants';
+import { NAV_LINKS, COMPANY } from '@/lib/constants';
 import type { Dictionary } from '@/i18n/dictionaries';
 
 interface NavbarProps {
-  locale: string;
   dict: Dictionary;
 }
 
-export default function Navbar({ locale, dict }: NavbarProps) {
+export default function Navbar({ dict }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const isRtl = locale === 'ar';
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
   const navItems = NAV_LINKS.map((link) => ({
-    href: `/${locale}${link.href}`,
+    href: link.href,
     label: dict.nav[link.key as keyof typeof dict.nav],
   }));
 
-  const isHome = pathname === `/${locale}` || pathname === `/${locale}/`;
+  const isHome = pathname === '/';
   const showTransparent = isHome && !scrolled;
+  const iconDark = !showTransparent || isOpen;
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        showTransparent ? 'bg-transparent' : 'bg-white/95 backdrop-blur-md shadow-xl'
+        showTransparent && !isOpen
+          ? 'bg-transparent'
+          : 'bg-white/95 backdrop-blur-md shadow-sm'
       }`}
     >
-      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-24 items-center justify-between gap-4">
-          {/* Logo */}
-          <Link href={`/${locale}`} className="flex items-center gap-3">
+      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="التنقل الرئيسي">
+        <div className="flex h-16 sm:h-20 items-center justify-between gap-3">
+          <Link href="/" className="flex items-center gap-2.5 min-w-0">
             <Image
               src="/logo.jpeg"
-              alt={isRtl ? COMPANY.nameAr : COMPANY.name}
-              width={48}
-              height={48}
-              className="w-12 h-12 rounded-2xl object-cover border border-white/20 bg-white/10"
+              alt={COMPANY.nameAr}
+              width={44}
+              height={44}
+              priority
+              className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl object-cover border border-white/20 bg-white/10 shrink-0"
             />
-            <div className={`flex flex-col ${isRtl ? 'items-end' : 'items-start'}`}>
-                <span className={`text-xl font-bold ${showTransparent ? 'text-white' : 'text-gray-700'}`}>
-                {isRtl ? COMPANY.nameAr : COMPANY.name}
+            <div className="flex flex-col items-start min-w-0">
+              <span
+                className={`text-lg sm:text-xl font-bold truncate ${
+                  showTransparent && !isOpen ? 'text-white' : 'text-gray-800'
+                }`}
+              >
+                {COMPANY.nameAr}
               </span>
-                <span className={`text-xs ${showTransparent ? 'text-white/80' : 'text-gray-500'}`}>
-                {isRtl ? COMPANY.taglineAr : COMPANY.tagline}
+              <span
+                className={`text-[10px] sm:text-xs truncate ${
+                  showTransparent && !isOpen ? 'text-white/80' : 'text-gray-500'
+                }`}
+              >
+                {COMPANY.taglineAr}
               </span>
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-2">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  pathname === item.href
-                    ? 'bg-primary text-white shadow-lg shadow-primary/20'
-                    : showTransparent
-                    ? 'hover:bg-white/15 text-white'
-                    : 'hover:bg-gray-100 text-gray-700'
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <LanguageSwitcher locale={locale} />
+          <div className="hidden lg:flex items-center gap-1">
+            {navItems.map((item) => {
+              const active = pathname === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`px-3 py-2 rounded-full text-sm font-medium transition-colors ${
+                    active
+                      ? 'bg-primary text-white'
+                      : showTransparent
+                        ? 'hover:bg-white/15 text-white'
+                        : 'hover:bg-gray-100 text-gray-700'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </div>
 
-          {/* Mobile menu button */}
-          <div className="flex items-center gap-3 lg:hidden">
-            <LanguageSwitcher locale={locale} />
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className={`p-2 rounded-lg transition-colors ${scrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/10'}`}
-              aria-label="Toggle menu"
+          <div className="flex items-center gap-2 lg:hidden">
+            <Link
+              href="/quote"
+              className="hidden xs:inline-flex sm:inline-flex rounded-full bg-secondary px-3 py-2 text-xs font-semibold text-white"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {dict.nav.quote}
+            </Link>
+            <button
+              type="button"
+              onClick={() => setIsOpen((v) => !v)}
+              className={`p-2.5 rounded-lg transition-colors min-h-11 min-w-11 flex items-center justify-center ${
+                iconDark ? 'text-gray-800 hover:bg-gray-100' : 'text-white hover:bg-white/10'
+              }`}
+              aria-label={isOpen ? 'إغلاق القائمة' : 'فتح القائمة'}
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                 {isOpen ? (
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 ) : (
@@ -100,42 +122,47 @@ export default function Navbar({ locale, dict }: NavbarProps) {
           </div>
         </div>
 
-        {/* Mobile menu */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
+              id="mobile-menu"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.25 }}
               className="lg:hidden overflow-hidden"
             >
-              <div className="py-4 space-y-2 border-t border-white/10 bg-white/95 backdrop-blur-md">
+              <div className="py-3 space-y-1 border-t border-gray-100 bg-white">
                 {navItems.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
                     onClick={() => setIsOpen(false)}
-                    className={`block px-4 py-3 rounded-2xl text-base font-medium transition-all duration-300 ${
+                    className={`block px-4 py-3.5 rounded-xl text-base font-medium min-h-12 ${
                       pathname === item.href
                         ? 'bg-primary text-white'
-                        : 'text-gray-700 hover:bg-gray-100'
+                        : 'text-gray-800 hover:bg-gray-50'
                     }`}
                   >
                     {item.label}
                   </Link>
                 ))}
-                <div className="border-t mt-3 pt-3 px-4">
-                  <p className="text-xs text-gray-500">{dict.footer.developerLinkText}</p>
-                  <div className="flex items-center gap-2 mt-1">
-                    <div className="text-sm font-medium text-gray-700">{DEVELOPER.name} ({DEVELOPER.role})</div>
-                    <a href={`tel:${DEVELOPER.phone}`} className="text-sm text-primary">{DEVELOPER.phone}</a>
-                  </div>
-                  <div className="mt-2">
-                    <a href={DEVELOPER.instagramUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-gray-400 hover:text-primary">
-                      {`@${DEVELOPER.instagram}`}
-                    </a>
-                  </div>
+                <div className="px-4 pt-2 pb-3 grid grid-cols-2 gap-2">
+                  <Link
+                    href={COMPANY.whatsappLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center min-h-12 rounded-xl bg-whatsapp text-white font-semibold text-sm"
+                  >
+                    واتساب
+                  </Link>
+                  <Link
+                    href="/quote"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center justify-center min-h-12 rounded-xl bg-secondary text-white font-semibold text-sm"
+                  >
+                    {dict.nav.quote}
+                  </Link>
                 </div>
               </div>
             </motion.div>

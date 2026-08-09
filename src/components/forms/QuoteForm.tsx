@@ -5,11 +5,10 @@ import emailjs from '@emailjs/browser';
 import type { Dictionary } from '@/i18n/dictionaries';
 
 interface QuoteFormProps {
-  locale: string;
   dict: Dictionary;
 }
 
-export default function QuoteForm({ locale, dict }: QuoteFormProps) {
+export default function QuoteForm({ dict }: QuoteFormProps) {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -43,7 +42,7 @@ export default function QuoteForm({ locale, dict }: QuoteFormProps) {
           service_type: formData.service,
           message: formData.description,
           form_type: 'quote',
-          locale,
+          locale: 'ar',
         },
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
       );
@@ -54,60 +53,72 @@ export default function QuoteForm({ locale, dict }: QuoteFormProps) {
     }
   };
 
+  const inputClass =
+    'w-full min-h-12 px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none text-base';
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <form onSubmit={handleSubmit} className="space-y-5" noValidate={false}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
+          <label htmlFor="quote-name" className="block text-sm font-semibold text-gray-700 mb-2">
             {dict.quote.form.name}
           </label>
           <input
+            id="quote-name"
             type="text"
             required
+            autoComplete="name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             placeholder={dict.quote.form.namePlaceholder}
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 outline-none"
+            className={inputClass}
           />
         </div>
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
+          <label htmlFor="quote-phone" className="block text-sm font-semibold text-gray-700 mb-2">
             {dict.quote.form.phone}
           </label>
           <input
+            id="quote-phone"
             type="tel"
             required
+            autoComplete="tel"
+            inputMode="tel"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             placeholder={dict.quote.form.phonePlaceholder}
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 outline-none"
+            className={inputClass}
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
+        <label htmlFor="quote-email" className="block text-sm font-semibold text-gray-700 mb-2">
           {dict.quote.form.email}
         </label>
         <input
+          id="quote-email"
           type="email"
           required
+          autoComplete="email"
+          inputMode="email"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           placeholder={dict.quote.form.emailPlaceholder}
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 outline-none"
+          className={inputClass}
         />
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
+        <label htmlFor="quote-service" className="block text-sm font-semibold text-gray-700 mb-2">
           {dict.quote.form.service}
         </label>
         <select
+          id="quote-service"
           required
           value={formData.service}
           onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 outline-none bg-white"
+          className={`${inputClass} bg-white`}
         >
           <option value="">{dict.quote.form.servicePlaceholder}</option>
           {serviceOptions.map((opt) => (
@@ -119,26 +130,27 @@ export default function QuoteForm({ locale, dict }: QuoteFormProps) {
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
+        <label htmlFor="quote-description" className="block text-sm font-semibold text-gray-700 mb-2">
           {dict.quote.form.description}
         </label>
         <textarea
+          id="quote-description"
           required
           rows={5}
           value={formData.description}
           onChange={(e) => setFormData({ ...formData, description: e.target.value })}
           placeholder={dict.quote.form.descriptionPlaceholder}
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 outline-none resize-none"
+          className={`${inputClass} resize-none`}
         />
       </div>
 
       {status === 'success' && (
-        <div className="p-4 bg-green/10 text-green rounded-lg font-medium">
+        <div role="status" aria-live="polite" className="p-4 bg-green/10 text-green rounded-lg font-medium">
           {dict.quote.form.success}
         </div>
       )}
       {status === 'error' && (
-        <div className="p-4 bg-red-100 text-red-600 rounded-lg font-medium">
+        <div role="alert" className="p-4 bg-red-100 text-red-600 rounded-lg font-medium">
           {dict.quote.form.error}
         </div>
       )}
@@ -146,7 +158,7 @@ export default function QuoteForm({ locale, dict }: QuoteFormProps) {
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="w-full bg-secondary text-white font-semibold py-4 px-8 rounded-lg hover:bg-orange-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-orange-500/25"
+        className="w-full min-h-12 bg-secondary text-white font-semibold py-4 px-8 rounded-lg hover:bg-orange-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {status === 'loading' ? dict.quote.form.submitting : dict.quote.form.submit}
       </button>

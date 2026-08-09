@@ -1,31 +1,22 @@
-import { notFound } from 'next/navigation';
-import { hasLocale, getDictionary } from '@/i18n/dictionaries';
+import { getDictionary } from '@/i18n/dictionaries';
 import { generateSeoMetadata } from '@/lib/seo';
 import Container from '@/components/shared/Container';
+import PageHeader from '@/components/shared/PageHeader';
 import ContactForm from '@/components/forms/ContactForm';
 import { COMPANY } from '@/lib/constants';
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  const dict = hasLocale(locale) ? await getDictionary(locale) : null;
+export async function generateMetadata() {
+  const dict = await getDictionary();
   return generateSeoMetadata({
-    title: dict?.contact?.title || 'Contact',
-    description: dict?.contact?.subtitle || 'Contact us',
-    locale,
+    title: dict.seo.contact.title,
+    description: dict.seo.contact.description,
     path: '/contact',
   });
 }
 
-export default async function ContactPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
-  if (!hasLocale(locale)) notFound();
-  const dict = await getDictionary(locale);
-  const isRtl = locale === 'ar';
-
+export default async function ContactPage() {
+  const dict = await getDictionary();
+  
   const contactInfo = [
     {
       icon: (
@@ -65,8 +56,8 @@ export default async function ContactPage({
         </svg>
       ),
       label: dict.contact.info.location,
-      value: isRtl ? COMPANY.locationAr : COMPANY.location,
-      href: '#',
+      value: COMPANY.locationAr,
+      href: COMPANY.mapSearchUrl,
     },
     {
       icon: (
@@ -81,23 +72,14 @@ export default async function ContactPage({
   ];
 
   return (
-    <div className="pt-20">
-      {/* Hero banner */}
-      <div className="bg-linear-to-r from-primary to-blue-700 py-20">
-        <Container>
-          <div className="text-center text-white">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">{dict.contact.title}</h1>
-            <p className="text-xl text-blue-100">{dict.contact.subtitle}</p>
-          </div>
-        </Container>
-      </div>
+    <div>
+      <PageHeader title={dict.contact.title} description={dict.contact.subtitle} />
 
-      <section className="py-20">
+      <section className="py-12 sm:py-16">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
-            {/* Contact Info */}
-            <div className="lg:col-span-2 space-y-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-8">{dict.contact.info.phone}</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
+            <div className="lg:col-span-2 space-y-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">{dict.footer.contactInfo}</h2>
               {contactInfo.map((info, index) => (
                 <a
                   key={index}
@@ -106,7 +88,7 @@ export default async function ContactPage({
                   rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                   className="flex items-start gap-4 p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors group"
                 >
-                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300 flex-shrink-0">
+                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors shrink-0">
                     {info.icon}
                   </div>
                   <div>
@@ -116,41 +98,55 @@ export default async function ContactPage({
                 </a>
               ))}
 
-              {/* Working Hours */}
               <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
-                <div className="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center text-gold flex-shrink-0">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center text-gold shrink-0">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
                 <div>
                   <p className="text-sm text-gray-500">{dict.contact.info.hours}</p>
-                  <p className="font-semibold text-gray-900">{dict.contact.info.hoursValue}</p>
+                  <p className="font-semibold text-gray-900">{COMPANY.openingHoursAr}</p>
+                </div>
+              </div>
+
+              <div className="p-4 rounded-xl border border-gray-100 bg-white">
+                <p className="text-sm font-semibold text-gray-900 mb-3">
+                  {dict.contact.serviceAreasTitle}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {COMPANY.serviceAreas.map((area) => (
+                    <span
+                      key={area}
+                      className="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-medium text-gray-700"
+                    >
+                      {area}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
 
-            {/* Contact Form */}
             <div className="lg:col-span-3">
-              <div className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100">
-                <ContactForm locale={locale} dict={dict} />
+              <div className="bg-white rounded-2xl p-5 sm:p-8 border border-gray-100 shadow-sm">
+                <ContactForm dict={dict} />
               </div>
             </div>
           </div>
         </Container>
       </section>
 
-      <section className="pb-20">
+      <section className="pb-12 sm:pb-16">
         <Container>
-          <div className="rounded-4xl overflow-hidden border border-gray-200 shadow-lg">
-            <div className="bg-primary/10 px-8 py-6">
-              <h2 className="text-3xl font-bold text-gray-900">{dict.contact.mapTitle}</h2>
-              <p className="mt-3 text-gray-600 max-w-3xl">{dict.contact.mapDescription}</p>
+          <div className="rounded-2xl overflow-hidden border border-gray-200">
+            <div className="bg-slate-50 px-5 sm:px-8 py-5">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900">{dict.contact.mapTitle}</h2>
+              <p className="mt-2 text-gray-600 text-sm sm:text-base max-w-3xl">{dict.contact.mapDescription}</p>
             </div>
             <iframe
-              title="CamTek location in Kuwait"
-              src="https://www.google.com/maps?q=Kuwait+City&output=embed"
-              className="w-full h-[420px] border-0"
+              title="منطقة خدمة كامتيك في الكويت"
+              src={COMPANY.mapEmbedUrl}
+              className="w-full h-[320px] sm:h-[420px] border-0"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />

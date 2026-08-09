@@ -1,5 +1,1 @@
-export interface Service {
-  id: string;
-  icon: string;
-  features: string[];
-}
+export type { Service, ServiceId } from '@/data/services';

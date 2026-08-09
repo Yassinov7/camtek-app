@@ -1,22 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getLocale, locales } from '@/i18n/config';
 
+/** Redirect legacy /ar and /en locale prefixes to unprefixed Arabic routes. */
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
-  );
-
-  if (pathnameHasLocale) return;
-
-  const locale = getLocale(request);
-  request.nextUrl.pathname = `/${locale}${pathname}`;
-  return NextResponse.redirect(request.nextUrl);
+  const localeMatch = pathname.match(/^\/(ar|en)(\/.*)?$/);
+  if (localeMatch) {
+    const rest = localeMatch[2] || '/';
+    const url = request.nextUrl.clone();
+    url.pathname = rest === '/' ? '/' : rest;
+    return NextResponse.redirect(url, 308);
+  }
 }
 
 export const config = {
-  matcher: [
-    '/((?!_next|api|favicon.ico|images|videos|.*\\..*).*)',
-  ],
+  matcher: ['/((?!_next|api|favicon.ico|.*\\..*).*)'],
 };
