@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
-import emailjs from '@emailjs/browser';
+import { COMPANY } from '@/lib/constants';
 import type { Dictionary } from '@/i18n/dictionaries';
 
 interface QuoteFormProps {
@@ -12,7 +12,6 @@ export default function QuoteForm({ dict }: QuoteFormProps) {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    email: '',
     service: '',
     description: '',
   });
@@ -22,32 +21,28 @@ export default function QuoteForm({ dict }: QuoteFormProps) {
     { value: 'indoor', label: dict.quote.serviceOptions.indoor },
     { value: 'outdoor', label: dict.quote.serviceOptions.outdoor },
     { value: 'dvr', label: dict.quote.serviceOptions.dvr },
+    { value: 'wifi', label: dict.quote.serviceOptions.wifi },
     { value: 'mobile', label: dict.quote.serviceOptions.mobile },
     { value: 'maintenance', label: dict.quote.serviceOptions.maintenance },
     { value: 'full', label: dict.quote.serviceOptions.full },
   ];
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     setStatus('loading');
 
     try {
-      await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '',
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '',
-        {
-          from_name: formData.name,
-          from_phone: formData.phone,
-          from_email: formData.email,
-          service_type: formData.service,
-          message: formData.description,
-          form_type: 'quote',
-          locale: 'ar',
-        },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+      const selectedService = serviceOptions.find((option) => option.value === formData.service)?.label || formData.service;
+      const whatsappMessage = encodeURIComponent(
+        `السلام عليكم، أريد طلب عرض سعر\n\nالاسم: ${formData.name}\nرقم الهاتف: ${formData.phone}\nالخدمة: ${selectedService}\nالوصف:\n${formData.description}`
       );
+
+      if (typeof window !== 'undefined') {
+        window.open(`${COMPANY.whatsappLink}?text=${whatsappMessage}`, '_blank', 'noopener,noreferrer');
+      }
+
       setStatus('success');
-      setFormData({ name: '', phone: '', email: '', service: '', description: '' });
+      setFormData({ name: '', phone: '', service: '', description: '' });
     } catch {
       setStatus('error');
     }
@@ -90,23 +85,6 @@ export default function QuoteForm({ dict }: QuoteFormProps) {
             className={inputClass}
           />
         </div>
-      </div>
-
-      <div>
-        <label htmlFor="quote-email" className="block text-sm font-semibold text-gray-700 mb-2">
-          {dict.quote.form.email}
-        </label>
-        <input
-          id="quote-email"
-          type="email"
-          required
-          autoComplete="email"
-          inputMode="email"
-          value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          placeholder={dict.quote.form.emailPlaceholder}
-          className={inputClass}
-        />
       </div>
 
       <div>

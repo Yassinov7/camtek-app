@@ -2,6 +2,7 @@ export type ServiceId =
   | 'indoor'
   | 'outdoor'
   | 'dvr'
+  | 'wifi'
   | 'mobile'
   | 'maintenance'
   | 'security';
@@ -15,6 +16,7 @@ export const services: Service[] = [
   { id: 'indoor', icon: 'CameraIndoor' },
   { id: 'outdoor', icon: 'CameraOutdoor' },
   { id: 'dvr', icon: 'Server' },
+  { id: 'wifi', icon: 'Wifi' },
   { id: 'mobile', icon: 'Smartphone' },
   { id: 'maintenance', icon: 'Wrench' },
   { id: 'security', icon: 'Shield' },

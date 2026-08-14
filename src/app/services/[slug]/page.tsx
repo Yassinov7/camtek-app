@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getDictionary } from '@/i18n/dictionaries';
 import { generateSeoMetadata } from '@/lib/seo';
@@ -17,6 +18,54 @@ type ServiceContent = {
   whoFor: string[];
   process: string[];
   features: string[];
+};
+
+const serviceImageMap: Record<ServiceId, string> = {
+  indoor: '/new public/advertise posters/راقب كل شي من مكانك - حلول مراقبة متكاملة -داخلي خارجي - بوستر نصي مع صور مناسبة.jpg',
+  outdoor: '/new public/advertise posters/كاميرات ip احترافية للمباني السكنية- بوستر نصي مع صور مناسبة.jpg',
+  dvr: '/new public/ستاند حائطي يستعرض الكاميرات والاجهزة مثبتة عليه.jpg',
+  wifi: '/new public/advertise posters/انترنت اسرع حياة اسرع - مع مقوي شبكات wifi- بوستر نصي مع صور مناسبة.jpg',
+  mobile: '/new public/advertise posters/حماية منزلك الذكية - انت في اي مكان ... منزلك تحت الحماية - بوستر نصي مع صور مناسبة.jpg',
+  maintenance: '/new public/advertise posters/لا تترك امنك للصدفة- احم مايهمك قبل فوات الاوان -بوستر نصي مع صور مناسبة.jpg',
+  security: '/new public/advertise posters/حلول مراقبة احترافية - امانك اولويتنا - بوستر نصي مع صور مناسبة.jpg',
+};
+
+const serviceGalleryMap: Record<ServiceId, string[]> = {
+  indoor: [
+    '/new public/نتيجة كاميرا داخلية لمراقبة المنزل 1.jpg',
+    '/new public/نتيجة كاميرا داخلية لمراقبة المنزل 2.jpg',
+    '/new public/صورة تظهر شاشة مراقبة الكاميرات للمنزل كاملا داخليا وخارجيا.jpg',
+  ],
+  outdoor: [
+    '/new public/advertise posters/كاميرات ip احترافية للمباني السكنية- بوستر نصي مع صور مناسبة.jpg',
+    '/new public/advertise posters/راقب كل شي من مكانك - حلول مراقبة متكاملة -داخلي خارجي - بوستر نصي مع صور مناسبة.jpg',
+    '/new public/advertise posters/حلول مراقبة احترافية - امانك اولويتنا - بوستر نصي مع صور مناسبة.jpg',
+  ],
+  dvr: [
+    '/new public/ستاند حائطي يستعرض الكاميرات والاجهزة مثبتة عليه.jpg',
+    '/new public/advertise posters/حلول مراقبة احترافية - امانك اولويتنا - بوستر نصي مع صور مناسبة.jpg',
+    '/new public/advertise posters/كاميرات ip احترافية للمباني السكنية- بوستر نصي مع صور مناسبة.jpg',
+  ],
+  wifi: [
+    '/new public/advertise posters/انترنت اسرع حياة اسرع - مع مقوي شبكات wifi- بوستر نصي مع صور مناسبة.jpg',
+    '/new public/advertise posters/حلول مراقبة احترافية - امانك اولويتنا - بوستر نصي مع صور مناسبة.jpg',
+    '/new public/advertise posters/راقب كل شي من مكانك - حلول مراقبة متكاملة -داخلي خارجي - بوستر نصي مع صور مناسبة.jpg',
+  ],
+  mobile: [
+    '/new public/advertise posters/حماية منزلك الذكية - انت في اي مكان ... منزلك تحت الحماية - بوستر نصي مع صور مناسبة.jpg',
+    '/new public/advertise posters/حلول مراقبة احترافية - امانك اولويتنا - بوستر نصي مع صور مناسبة.jpg',
+    '/new public/advertise posters/امان بيتك يبدا من هنا - عرض خاص بدءا من 99د.ك - بوستر نصي اعلاني مع صور مناسبة.jpg',
+  ],
+  maintenance: [
+    '/new public/advertise posters/لا تترك امنك للصدفة- احم مايهمك قبل فوات الاوان -بوستر نصي مع صور مناسبة.jpg',
+    '/new public/advertise posters/حلول مراقبة احترافية - امانك اولويتنا - بوستر نصي مع صور مناسبة.jpg',
+    '/new public/advertise posters/كاميرات ip احترافية للمباني السكنية- بوستر نصي مع صور مناسبة.jpg',
+  ],
+  security: [
+    '/new public/advertise posters/حلول مراقبة احترافية - امانك اولويتنا - بوستر نصي مع صور مناسبة.jpg',
+    '/new public/advertise posters/امانك اولويتنا - احدث تقنيات المراقبة -حماية متكاملة ليل ونهار - بوستر نصي مع صور مناسبة.jpg',
+    '/new public/advertise posters/راقب كل شي من مكانك - حلول مراقبة متكاملة -داخلي خارجي - بوستر نصي مع صور مناسبة.jpg',
+  ],
 };
 
 export function generateStaticParams() {
@@ -58,6 +107,8 @@ export default async function ServiceDetailPage({
   const dict = await getDictionary();
   const service = dict.services[slug] as ServiceContent;
   const otherServices = services.filter((s) => s.id !== slug);
+  const heroImage = serviceImageMap[slug as ServiceId];
+  const galleryImages = serviceGalleryMap[slug as ServiceId] ?? [heroImage];
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -98,6 +149,41 @@ export default async function ServiceDetailPage({
             >
               ← {dict.services.backToServices}
             </Link>
+          </div>
+
+          <div className="mb-8 grid gap-4 lg:grid-cols-[1.3fr_0.7fr]">
+            <div className="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm">
+              <div className="relative h-[22rem] sm:h-[26rem] w-full bg-white">
+                <Image
+                  src={heroImage}
+                  alt={service.title}
+                  fill
+                  priority
+                  className="object-contain p-2"
+                  sizes="(max-width: 1024px) 100vw, 65vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/20 to-transparent" />
+                <div className="absolute inset-0 flex items-end p-6">
+                  <p className="max-w-lg text-xl font-bold text-white sm:text-2xl">{service.title}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+              {galleryImages.slice(0, 3).map((image, index) => (
+                <div key={`${image}-${index}`} className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+                  <div className="relative h-36 sm:h-40 lg:h-36 w-full bg-white">
+                    <Image
+                      src={image}
+                      alt={`${service.title} ${index + 1}`}
+                      fill
+                      className="object-contain p-2"
+                      sizes="(max-width: 640px) 33vw, 18vw"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="grid gap-10 lg:grid-cols-[1.4fr_0.8fr]">

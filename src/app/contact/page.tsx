@@ -2,7 +2,6 @@ import { getDictionary } from '@/i18n/dictionaries';
 import { generateSeoMetadata } from '@/lib/seo';
 import Container from '@/components/shared/Container';
 import PageHeader from '@/components/shared/PageHeader';
-import ContactForm from '@/components/forms/ContactForm';
 import { COMPANY } from '@/lib/constants';
 
 export async function generateMetadata() {
@@ -16,7 +15,7 @@ export async function generateMetadata() {
 
 export default async function ContactPage() {
   const dict = await getDictionary();
-  
+
   const contactInfo = [
     {
       icon: (
@@ -37,16 +36,6 @@ export default async function ContactPage() {
       label: dict.contact.info.whatsapp,
       value: COMPANY.whatsapp,
       href: COMPANY.whatsappLink,
-    },
-    {
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-        </svg>
-      ),
-      label: dict.contact.info.email,
-      value: COMPANY.email,
-      href: `mailto:${COMPANY.email}`,
     },
     {
       icon: (
@@ -77,6 +66,16 @@ export default async function ContactPage() {
 
       <section className="py-12 sm:py-16">
         <Container>
+          <div className="mb-8 flex flex-col gap-3 rounded-2xl border border-gray-200 bg-gradient-to-r from-primary/10 via-white to-slate-50 p-5 sm:p-6">
+            <h2 className="text-xl font-bold text-gray-900">تواصل مباشر</h2>
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <a href={`tel:${COMPANY.phone}`} className="inline-flex items-center justify-center min-h-11 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 transition-colors">اتصال مباشر</a>
+              <a href={COMPANY.whatsappLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center min-h-11 rounded-full bg-whatsapp px-4 py-2 text-sm font-semibold text-white hover:bg-green-500 transition-colors">واتساب</a>
+              <a href={COMPANY.instagramPrimaryUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center min-h-11 rounded-full border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-800 hover:border-primary hover:text-primary transition-colors">Instagram</a>
+              <a href={COMPANY.instagramSecondaryUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center min-h-11 rounded-full border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-800 hover:border-primary hover:text-primary transition-colors">CamTek</a>
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
             <div className="lg:col-span-2 space-y-4">
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">{dict.footer.contactInfo}</h2>
@@ -129,7 +128,24 @@ export default async function ContactPage() {
 
             <div className="lg:col-span-3">
               <div className="bg-white rounded-2xl p-5 sm:p-8 border border-gray-100 shadow-sm">
-                <ContactForm dict={dict} />
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">تواصل مباشر وسريع</h2>
+                <p className="text-sm text-gray-600 leading-relaxed mb-6">
+                  إذا كنت تريد عرضاً سريعاً أو تحتاج استشارة فورية، ارسل رسالة واتساب أو اتصل مباشرة معنا، وسنرد لك خلال ساعات العمل.
+                </p>
+                <div className="space-y-3">
+                  <a href={COMPANY.whatsappLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between rounded-xl border border-gray-200 bg-whatsapp/5 p-4 text-gray-800 hover:border-whatsapp hover:bg-whatsapp/10 transition-colors">
+                    <span className="font-semibold">واتساب</span>
+                    <span className="text-sm">{COMPANY.whatsapp}</span>
+                  </a>
+                  <a href={`tel:${COMPANY.phone}`} className="flex items-center justify-between rounded-xl border border-gray-200 bg-primary/5 p-4 text-gray-800 hover:border-primary hover:bg-primary/10 transition-colors">
+                    <span className="font-semibold">اتصال مباشر</span>
+                    <span className="text-sm">{COMPANY.phone}</span>
+                  </a>
+                  <a href={COMPANY.instagramPrimaryUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between rounded-xl border border-gray-200 bg-gray-50 p-4 text-gray-800 hover:border-primary hover:bg-primary/5 transition-colors">
+                    <span className="font-semibold">Instagram</span>
+                    <span className="text-sm">@{COMPANY.instagramPrimary}</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>

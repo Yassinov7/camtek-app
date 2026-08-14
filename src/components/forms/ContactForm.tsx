@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
-import emailjs from '@emailjs/browser';
+import { COMPANY } from '@/lib/constants';
 import type { Dictionary } from '@/i18n/dictionaries';
 
 interface ContactFormProps {
@@ -12,30 +12,25 @@ export default function ContactForm({ dict }: ContactFormProps) {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    email: '',
     message: '',
   });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     setStatus('loading');
 
     try {
-      await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '',
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '',
-        {
-          from_name: formData.name,
-          from_phone: formData.phone,
-          from_email: formData.email,
-          message: formData.message,
-          locale: 'ar',
-        },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+      const whatsappMessage = encodeURIComponent(
+        `السلام عليكم، أريد التواصل معكم\n\nالاسم: ${formData.name}\nرقم الهاتف: ${formData.phone}\nالرسالة:\n${formData.message}`
       );
+
+      if (typeof window !== 'undefined') {
+        window.open(`${COMPANY.whatsappLink}?text=${whatsappMessage}`, '_blank', 'noopener,noreferrer');
+      }
+
       setStatus('success');
-      setFormData({ name: '', phone: '', email: '', message: '' });
+      setFormData({ name: '', phone: '', message: '' });
     } catch {
       setStatus('error');
     }
@@ -78,23 +73,6 @@ export default function ContactForm({ dict }: ContactFormProps) {
             className={inputClass}
           />
         </div>
-      </div>
-
-      <div>
-        <label htmlFor="contact-email" className="block text-sm font-semibold text-gray-700 mb-2">
-          {dict.contact.form.email}
-        </label>
-        <input
-          id="contact-email"
-          type="email"
-          required
-          autoComplete="email"
-          inputMode="email"
-          value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          placeholder={dict.contact.form.emailPlaceholder}
-          className={inputClass}
-        />
       </div>
 
       <div>

@@ -12,8 +12,13 @@ interface HeroProps {
   dict: Dictionary;
 }
 
+const newPublicAsset = (relativePath: string) => encodeURI(`/new public/${relativePath}`);
+
 export default function Hero({ dict }: HeroProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const heroPoster = newPublicAsset('advertise posters/حماية منزلك الذكية - انت في اي مكان ... منزلك تحت الحماية - بوستر نصي مع صور مناسبة.jpg');
+  const heroVideoMobile = newPublicAsset('video/فيديو عن مسكة باب حديثة وذكية توفر ميزات امان حديثة.mp4');
+  const heroVideoDesktop = newPublicAsset('video/فيديو يتكلم عن عروض الكاميرات وتوفر جميع انوعها داخلية خارجية -وايفاي او سلكي -ايضا موجود مقوي سيفس انترنت -مع صوت.mp4');
   const [reduceMotion, setReduceMotion] = useState(false);
   const [loadVideo, setLoadVideo] = useState(false);
   const [videoReady, setVideoReady] = useState(false);
@@ -68,7 +73,7 @@ export default function Hero({ dict }: HeroProps) {
     <section className="relative min-h-[100svh] flex items-end sm:items-center overflow-hidden">
       <div className="absolute inset-0">
         <Image
-          src="/hero-poster.jpg"
+          src={heroPoster}
           alt=""
           fill
           priority
@@ -85,15 +90,15 @@ export default function Hero({ dict }: HeroProps) {
             loop
             playsInline
             preload="metadata"
-            poster="/hero-poster.jpg"
+            poster={heroPoster}
             onLoadedData={() => setVideoReady(true)}
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
               videoReady ? 'opacity-100' : 'opacity-0'
             }`}
             aria-hidden
           >
-            <source src="/video-mobile.mp4" type="video/mp4" media="(max-width: 767px)" />
-            <source src="/video.mp4" type="video/mp4" />
+            <source src={heroVideoMobile} type="video/mp4" media="(max-width: 767px)" />
+            <source src={heroVideoDesktop} type="video/mp4" />
           </video>
         )}
 

@@ -68,13 +68,13 @@ export default function ProjectGallery({ dict }: ProjectGalleryProps) {
                 transition={{ delay: index * 0.04, duration: 0.25 }}
                 className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm"
               >
-                <div className="relative aspect-[4/3] overflow-hidden">
+                <div className="relative aspect-[16/11] overflow-hidden bg-white">
                   <Image
                     src={project.image}
                     alt={projectData?.name || project.id}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover"
+                    className="object-contain p-2"
                   />
                   <div className="absolute top-3 right-3">
                     <span

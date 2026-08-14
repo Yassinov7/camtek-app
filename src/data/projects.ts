@@ -1,34 +1,36 @@
 import { Project } from '@/types/project';
 
+const newPublicAsset = (relativePath: string) => encodeURI(`/new public/${relativePath}`);
+
 export const projects: Project[] = [
   {
     id: 'project1',
-    image: '/offer1.jpeg',
+    image: newPublicAsset('ستاند حائطي يستعرض الكاميرات والاجهزة مثبتة عليه.jpg'),
     category: 'commercial',
   },
   {
     id: 'project2',
-    image: '/offer2.jpeg',
+    image: newPublicAsset('صورة تظهر شاشة مراقبة الكاميرات للمنزل كاملا داخليا وخارجيا.jpg'),
     category: 'residential',
   },
   {
     id: 'project3',
-    image: '/offer3.jpeg',
-    category: 'industrial',
+    image: newPublicAsset('نتيجة كاميرا داخلية لمراقبة المنزل 1.jpg'),
+    category: 'residential',
   },
   {
     id: 'project4',
-    image: '/offer4.jpeg',
+    image: newPublicAsset('نتيجة كاميرا داخلية لمراقبة المنزل 2.jpg'),
     category: 'commercial',
   },
   {
     id: 'project5',
-    image: '/offer5.jpeg',
-    category: 'residential',
+    image: newPublicAsset('outdour garage (1)/نتيجة كاميرا مراقبة خارجية.jpg'),
+    category: 'industrial',
   },
   {
     id: 'project6',
-    image: '/offer6.jpeg',
+    image: newPublicAsset('outdour garage (1)/نتيجة كاميرا مراقبة خارجية2.jpg'),
     category: 'commercial',
   },
 ];

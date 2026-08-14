@@ -6,6 +6,7 @@ import SectionTitle from '@/components/shared/SectionTitle';
 import Container from '@/components/shared/Container';
 import Button from '@/components/shared/Button';
 import { projects } from '@/data/projects';
+import { COMPANY } from '@/lib/constants';
 import type { Dictionary } from '@/i18n/dictionaries';
 
 interface ProjectsPreviewProps {
@@ -30,22 +31,23 @@ export default function ProjectsPreview({ dict }: ProjectsPreviewProps) {
             } | undefined;
 
             return (
-              <motion.div
+              <motion.article
                 key={project.id}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08, duration: 0.4 }}
-                className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100"
+                className="overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-transform hover:-translate-y-1"
               >
-                <div className="relative aspect-[4/3] overflow-hidden">
+                <div className="relative aspect-[16/11] overflow-hidden bg-white">
                   <Image
                     src={project.image}
                     alt={projectData?.name || project.id}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover"
+                    className="object-contain p-2"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
                   <div className="absolute top-3 right-3">
                     <span
                       className={`px-3 py-1 rounded-full text-xs font-semibold text-white ${
@@ -60,17 +62,40 @@ export default function ProjectsPreview({ dict }: ProjectsPreviewProps) {
                     </span>
                   </div>
                 </div>
+
                 <div className="p-5">
                   <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2 leading-snug">
                     {projectData?.name || project.id}
                   </h3>
+
                   {projectData?.summary && (
-                    <p className="text-sm text-gray-600 leading-relaxed mb-3">{projectData.summary}</p>
+                    <p className="mb-3 text-sm leading-relaxed text-gray-600">{projectData.summary}</p>
                   )}
-                  <p className="text-sm text-gray-500">{projectData?.location}</p>
-                  <p className="text-sm text-gray-500 mt-1">{projectData?.cameras}</p>
+
+                  <div className="space-y-1.5 border-t border-gray-100 pt-3 text-sm text-gray-600">
+                    <p>
+                      <span className="font-medium text-gray-800">{dict.projects.details.location}:</span>{' '}
+                      {projectData?.location}
+                    </p>
+                    <p>
+                      <span className="font-medium text-gray-800">{dict.projects.details.cameras}:</span>{' '}
+                      {projectData?.cameras}
+                    </p>
+                  </div>
+
+                  <div className="mt-4 flex items-center justify-between gap-3 border-t border-gray-100 pt-3">
+                    <span className="text-xs font-medium text-gray-500">تواصل مباشر</span>
+                    <a
+                      href={COMPANY.whatsappLink}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-sm font-semibold text-primary hover:underline"
+                    >
+                      {COMPANY.phone}
+                    </a>
+                  </div>
                 </div>
-              </motion.div>
+              </motion.article>
             );
           })}
         </div>
