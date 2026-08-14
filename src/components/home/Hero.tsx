@@ -16,7 +16,7 @@ const newPublicAsset = (relativePath: string) => encodeURI(`/new public/${relati
 
 export default function Hero({ dict }: HeroProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const heroPoster = newPublicAsset('advertise posters/حماية منزلك الذكية - انت في اي مكان ... منزلك تحت الحماية - بوستر نصي مع صور مناسبة.jpg');
+  const heroPoster = newPublicAsset('advertise posters/لا تترك امنك للصدفة- احم مايهمك قبل فوات الاوان -بوستر نصي مع صور مناسبة.jpg');
   const heroVideoMobile = newPublicAsset('video/فيديو عن مسكة باب حديثة وذكية توفر ميزات امان حديثة.mp4');
   const heroVideoDesktop = newPublicAsset('video/فيديو يتكلم عن عروض الكاميرات وتوفر جميع انوعها داخلية خارجية -وايفاي او سلكي -ايضا موجود مقوي سيفس انترنت -مع صوت.mp4');
   const [reduceMotion, setReduceMotion] = useState(false);
